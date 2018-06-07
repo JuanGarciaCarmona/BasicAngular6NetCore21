@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NetCore21.Data;
+using NetCore21.Model.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace NetCore21
 {
@@ -24,11 +27,20 @@ namespace NetCore21
           options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
           b => b.MigrationsAssembly("NetCore21")));
 
-      services.AddSpaStaticFiles(c =>
+      // add identity
+      var builder = services.AddIdentityCore<AppUser>(o =>
       {
-        c.RootPath = "wwwroot";
+        // configure identity options
+        o.Password.RequireDigit = false;
+        o.Password.RequireLowercase = false;
+        o.Password.RequireUppercase = false;
+        o.Password.RequireNonAlphanumeric = false;
+        o.Password.RequiredLength = 6;
       });
+      builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), builder.Services);
+      builder.AddEntityFrameworkStores<NetCore21DbContext>().AddDefaultTokenProviders();
 
+      services.AddAutoMapper();
       services.AddMvc();
     }
 
@@ -43,18 +55,7 @@ namespace NetCore21
       app.UseDefaultFiles();
       app.UseStaticFiles();
 
-      app.UseMvc(routes =>
-      {
-        routes.MapRoute(name: "default", template: "api/{controller}/{action=index}/{id}");
-      });
-
-      app.UseSpa(spa =>
-      {
-        // To learn more about options for serving an Angular SPA from ASP.NET Core,
-        // see https://go.microsoft.com/fwlink/?linkid=864501
-
-        spa.Options.SourcePath = "wwwroot";
-      });
+      app.UseMvc();
     }
   }
 }
