@@ -7,11 +7,25 @@ using Microsoft.Extensions.DependencyInjection;
 using NetCore21.Data;
 using NetCore21.Model.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using NetCore21.Auth;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.AspNetCore.Http;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Diagnostics;
+using System.Net;
+using NetCore21.Extensions;
 
 namespace NetCore21
 {
   public class Startup
   {
+    private const string SecretKey = "iNivDmHLpUA223sqsfhqGbMRdRj1PVkH"; // todo: get this from somewhere secure
+    private readonly SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
+
     public Startup(IConfiguration configuration)
     {
       Configuration = configuration;
@@ -27,7 +41,54 @@ namespace NetCore21
           options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
           b => b.MigrationsAssembly("NetCore21")));
 
-      // add identity
+      services.AddSingleton<IJwtFactory, JwtFactory>();
+
+      services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
+
+      // Configure JWT
+      var jwtOptions = Configuration.GetSection(nameof(JwtOptions));
+      services.Configure<JwtOptions>(options =>
+      {
+        options.Issuer = jwtOptions[nameof(JwtOptions.Issuer)];
+        options.Audience = jwtOptions[nameof(JwtOptions.Audience)];
+        options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
+      });
+
+      var tokenValidationParameters = new TokenValidationParameters
+      {
+        ValidateIssuer = true,
+        ValidIssuer = jwtOptions[nameof(JwtOptions.Issuer)],
+
+        ValidateAudience = true,
+        ValidAudience = jwtOptions[nameof(JwtOptions.Audience)],
+
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = _signingKey,
+
+        RequireExpirationTime = false,
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero
+      };
+
+      services.AddAuthentication(options =>
+      {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+      }).AddJwtBearer(configureOptions =>
+      {
+        configureOptions.ClaimsIssuer = jwtOptions[nameof(JwtOptions.Issuer)];
+        configureOptions.TokenValidationParameters = tokenValidationParameters;
+        configureOptions.SaveToken = true;
+      });
+
+      services.AddAuthorization(options =>
+      {
+        options.AddPolicy("ApiUser", policy => policy.RequireClaim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.ApiAccess));
+      });
+
+
+      // Configure Identity COre
       var builder = services.AddIdentityCore<AppUser>(o =>
       {
         // configure identity options
@@ -41,7 +102,7 @@ namespace NetCore21
       builder.AddEntityFrameworkStores<NetCore21DbContext>().AddDefaultTokenProviders();
 
       services.AddAutoMapper();
-      services.AddMvc();
+      services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>()); ;
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,10 +112,28 @@ namespace NetCore21
       {
         app.UseDeveloperExceptionPage();
       }
+      app.UseExceptionHandler(
+        builder =>
+        {
+          builder.Run(
+                    async context =>
+                    {
+                      context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                      context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
 
+                      var error = context.Features.Get<IExceptionHandlerFeature>();
+                      if (error != null)
+                      {
+                        context.Response.AddApplicationError(error.Error.Message);
+                        await context.Response.WriteAsync(error.Error.Message).ConfigureAwait(false);
+                      }
+                    });
+        });
+
+
+      app.UseAuthentication();
       app.UseDefaultFiles();
       app.UseStaticFiles();
-
       app.UseMvc();
     }
   }
