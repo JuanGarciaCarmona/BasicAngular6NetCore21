@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace NetCore21.Controllers
 {
-  [Authorize(Policy = "ApiUser")]
   [Route("api/[controller]")]
   public class AccountController : Controller
   {

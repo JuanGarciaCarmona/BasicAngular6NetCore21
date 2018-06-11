@@ -87,7 +87,7 @@ namespace NetCore21
       });
 
 
-      // Configure Identity COre
+      // Configure Identity Core
       var builder = services.AddIdentityCore<AppUser>(o =>
       {
         // configure identity options

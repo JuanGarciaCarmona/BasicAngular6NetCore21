@@ -24,8 +24,8 @@ namespace NetCore21.Auth
         new Claim(JwtRegisteredClaimNames.Sub, userName),
         new Claim(JwtRegisteredClaimNames.Jti, await _jwtOptions.JtiGenerator()),
         new Claim(JwtRegisteredClaimNames.Iat, ToUnixEpochDate(_jwtOptions.IssuedAt).ToString(), ClaimValueTypes.Integer64),
-        identity.FindFirst(Constants.Strings.JwtClaimIdentifiers.Rol),
-        identity.FindFirst(Constants.Strings.JwtClaimIdentifiers.Id)
+        identity.FindFirst(Constants.JwtClaimIdentifiers.Rol),
+        identity.FindFirst(Constants.JwtClaimIdentifiers.Id)
       };
 
       // Create the JWT security token and encode it.
@@ -44,18 +44,19 @@ namespace NetCore21.Auth
 
     public ClaimsIdentity GenerateClaimsIdentity(string userName, string id)
     {
-      return new ClaimsIdentity(new GenericIdentity(userName, "Token"), new[]
-      {
-                new Claim(Constants.Strings.JwtClaimIdentifiers.Id, id),
-                new Claim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.ApiAccess)
-            });
+      return new ClaimsIdentity(
+        new GenericIdentity(userName, "Token"),
+        new[]
+        {
+          new Claim(Constants.JwtClaimIdentifiers.Id, id),
+          new Claim(Constants.JwtClaimIdentifiers.Rol, Constants.JwtClaims.ApiAccess)
+        });
     }
 
     /// <returns>Date converted to seconds since Unix epoch (Jan 1, 1970, midnight UTC).</returns>
     private static long ToUnixEpochDate(DateTime date)
       => (long)Math.Round((date.ToUniversalTime() -
-                           new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero))
-                          .TotalSeconds);
+        new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero)).TotalSeconds);
 
     private static void ThrowIfInvalidOptions(JwtOptions options)
     {
