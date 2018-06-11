@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NetCore21.Data;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace NetCore21.Controllers
 {
+  [Authorize(Policy = "ApiUser")]
   [Route("api/[controller]")]
   public class AccountController : Controller
   {

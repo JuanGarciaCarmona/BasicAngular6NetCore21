@@ -7,7 +7,7 @@ namespace NetCore21.Controllers
   [Route("api/[controller]")]
   public class ValuesController : ControllerBase
   {
-    // GET api/values
+    [Authorize(Policy = "ApiUser")]
     [HttpGet]
     public ActionResult<IEnumerable<string>> Get()
     {
