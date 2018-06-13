@@ -6,21 +6,27 @@ import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AdminModule } from './admin/admin.module';
+import { AuthService } from './_services/auth.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignupComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AdminModule
   ],
   providers: [
-    { provide: 'BASE_URL', useFactory: getBaseUrl }
+    { provide: 'BASE_URL', useFactory: getBaseUrl },
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
