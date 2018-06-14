@@ -1,11 +1,18 @@
 <p>
-  home works!
+  <a routerLink="/admin">Admnin</a>
+  <br />
+  <a routerLink="/profile">Profile</a>
+</p>
+
+<hr />
+
+<div *ngIf="isLoggedIn()">
+  <button (click)="logout()">Logout</button>
+</div>
+<div *ngIf="!isLoggedIn()">
   <br />
   <a routerLink="/signup">Signup</a>
   <br />
   <a routerLink="/login">Login</a>
   <br />
-  <a routerLink="/admin">Admnin</a>
-  <br />
-  <a routerLink="/profile">Profile</a> 
-</p>
+</div>

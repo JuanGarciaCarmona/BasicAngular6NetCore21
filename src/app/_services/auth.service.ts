@@ -8,14 +8,20 @@ import { Router } from '@angular/router';
 @Injectable()
 export class AuthService {
 
+  private loggedIn = false;
+  userProfile: UserProfile;
+
   constructor(
     private router: Router,
     private http: HttpClient,
-    @Inject('BASE_URL') private baseUrl: string) { }
+    @Inject('BASE_URL') private baseUrl: string) {
 
-  userProfile: UserProfile;
+    this.loggedIn = !!localStorage.getItem('auth_token');
+  }
+
 
   signupUser(user: Signup) {
+
     return this.http.post(this.baseUrl + 'api/account', user)
       .subscribe(
         data => this.router.navigate(['/login'])
@@ -23,23 +29,28 @@ export class AuthService {
   }
 
   login(user: Login) {
+
     return this.http.post<Login>(this.baseUrl + 'api/auth/login', user)
       .subscribe(
         data => {
           this.setSession(data)
+          this.loggedIn = true
           this.router.navigate(['/profile'])
         }
       )
   }
 
   logout() {
+
+    this.loggedIn = false
     localStorage.removeItem("id_token");
     localStorage.removeItem("auth_token");
     localStorage.removeItem("expires_at");
   }
 
   getUserProfile() {
-    const authToken = localStorage.getItem("auth_token");
+
+    let authToken = localStorage.getItem("auth_token");
 
     if (this.userProfile == null) {
       this.http.get<UserProfile>(this.baseUrl + 'api/profile', { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + authToken }) })
@@ -50,7 +61,13 @@ export class AuthService {
     return this.userProfile
   }
 
+  isLoggedIn() {
+
+    return this.loggedIn;
+  }
+
   private setSession(authResult) {
+
     const expiresAt = authResult.expiresIn * 1000 + Date.now();
     localStorage.setItem('id_token', authResult.id);
     localStorage.setItem('auth_token', authResult.authToken);
