@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
+import { UserProfile } from '../_models/userProfile.model';
 
 @Component({
   selector: 'app-profile',
@@ -8,12 +9,14 @@ import { AuthService } from '../_services/auth.service';
 })
 
 export class ProfileComponent implements OnInit {
-  profileArray = this._makeProfileArray(this.auth.userProfile);
+  userProfile: UserProfile
+  profileArray: any[]
 
   constructor(public auth: AuthService) { }
 
   ngOnInit() {
-    this.auth.getUserProfile();
+    this.userProfile = this.auth.getUserProfile();
+    this.profileArray = this._makeProfileArray(this.userProfile);
   }
 
   private _makeProfileArray(obj) {
@@ -27,5 +30,4 @@ export class ProfileComponent implements OnInit {
 
     return keyPropArray;
   }
-
 }
