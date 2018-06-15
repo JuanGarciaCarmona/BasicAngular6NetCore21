@@ -18,6 +18,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Diagnostics;
 using System.Net;
 using NetCore21.Extensions;
+using System.IO;
 
 namespace NetCore21
 {
@@ -129,6 +130,19 @@ namespace NetCore21
                     });
         });
 
+      // Redirect non api calls to angular app and let the routing to be managed there. 
+      app.Use(async (context, next) =>
+      {
+        await next();
+
+        if (context.Response.StatusCode == 404 &&
+           !Path.HasExtension(context.Request.Path.Value) &&
+           !context.Request.Path.Value.StartsWith("/api/"))
+        {
+          context.Request.Path = "/index.html";
+          await next();
+        }
+      });
 
       app.UseAuthentication();
       app.UseDefaultFiles();
