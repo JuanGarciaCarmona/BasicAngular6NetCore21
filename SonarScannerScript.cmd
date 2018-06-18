@@ -5,12 +5,12 @@ dotnet-sonarscanner begin /k:"NetCore21" /n:"NetCore21" /v:"1.0" /d:sonar.cs.xun
 
 dotnet build NetCore21.sln /p:DebugType=Full
 
-cd ../tests
+cd tests
 REM GENERATION Com.Solera.Vin.Crosscutting.Tests TEST REPORT
-cd NetCore21.Tests/
-%opencover% -target:%dotnet% -targetargs:"test \"NetCore21.Tests.csproj\" --configuration Debug --no-build" -filter:"+[*NetCore21*]* -[*.Test*]*" -oldStyle -register:user -output:"BasicAngular6NetCore21/SonarQubeResults/OpenCoverNetCore21.xml"
+cd NetCore21.Site.Tests/
+%opencover% -target:%dotnet% -targetargs:"test \"NetCore21.Site.Tests.csproj\" --configuration Debug --no-build" -filter:"+[*NetCore21*]* -[*.Test*]*" -oldStyle -register:user -output:"../../SonarQubeResults/OpenCoverNetCore21.xml"
 dotnet xunit --fx-version 2.0.0 -xml BasicAngular6NetCore21/SonarQubeResults/XUnitResultNetCore21.xml
-cd ../BasicAngular6NetCore21
+cd ../../
 
 
 dotnet-sonarscanner end
