@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace NetCore21.Helper
 {
-  public class ErrorHelper
+  public static class ErrorHelper
   {
     public static ModelStateDictionary AddErrorsToModelState(IdentityResult identityResult, ModelStateDictionary modelState)
     {

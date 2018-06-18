@@ -36,9 +36,7 @@ export class AuthService {
     return this.http.post<Login>(this.baseUrl + 'api/auth/login', user)
       .subscribe(
         data => {
-          this.setSession(data)
-          this.loggedIn = true
-          this.router.navigate(['/profile'])
+          this.performLogin(data);
         }
       )
   }
@@ -48,9 +46,7 @@ export class AuthService {
     return this.http.post(
       this.baseUrl + 'api/facebook/authenticate', JSON.stringify({ accessToken }), { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) })
       .subscribe(data => {
-        this.setSession(data)
-        this.loggedIn = true
-        this.router.navigate(['/profile'])
+        this.performLogin(data);
       })
   }
 
@@ -78,6 +74,12 @@ export class AuthService {
   isLoggedIn() {
 
     return this.loggedIn;
+  }
+
+  private performLogin(data) {
+    this.setSession(data);
+    this.loggedIn = true;
+    this.router.navigate(['/profile']);
   }
 
   private setSession(authResult) {

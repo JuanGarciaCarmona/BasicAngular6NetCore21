@@ -64,17 +64,17 @@ namespace NetCore21.Auth
 
       if (options.ValidFor <= TimeSpan.Zero)
       {
-        throw new ArgumentException("Must be a non-zero TimeSpan.", nameof(JwtOptions.ValidFor));
+        throw new ArgumentOutOfRangeException(nameof(options), "ValidFor Must be a non-zero TimeSpan.");
       }
 
       if (options.SigningCredentials == null)
       {
-        throw new ArgumentNullException(nameof(JwtOptions.SigningCredentials));
+        throw new ArgumentOutOfRangeException(nameof(options), "SigningCredentials must not be null.");
       }
 
       if (options.JtiGenerator == null)
       {
-        throw new ArgumentNullException(nameof(JwtOptions.JtiGenerator));
+        throw new ArgumentOutOfRangeException(nameof(options), "JtiGenerator must not be null.");
       }
     }
   }

@@ -9,6 +9,9 @@
 /obj
 /wwwroot
 
+#SonarQube
+.sonarqube/
+
 # dependencies
 /node_modules
 

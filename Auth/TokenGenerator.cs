@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace NetCore21.Auth
 {
-  public class TokenGenerator
+  public static class TokenGenerator
   {
     public static async Task<string> GenerateJwt(
       ClaimsIdentity identity,
