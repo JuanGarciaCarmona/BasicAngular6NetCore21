@@ -1,0 +1,11 @@
+<h1>{{userProfile?.name}}</h1>
+
+<ul>
+  <li *ngFor="let profileProp of profileArray">
+    <code>{{profileProp}}</code>
+  </li>
+</ul>
+
+<p>
+  <a routerLink="/">Back</a>
+</p>
