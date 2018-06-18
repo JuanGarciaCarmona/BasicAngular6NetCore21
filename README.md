@@ -1,3 +1,10 @@
-Step 1: http://juan-garcia-carmona.blogspot.com/2018/06/asp-net-core-21-angular-6.html
-Step 2: https://juan-garcia-carmona.blogspot.com/2018/06/asp-net-core-21-angular-6-autenticacion.html
-Step 3: https://juan-garcia-carmona.blogspot.com/2018/06/docker-practico-sonarqube.html
+
+ **1. Step 1: Basic Project**
+    http://juan-garcia-carmona.blogspot.com/2018/06/asp-net-core-21-angular-6.html
+    
+ **2. Step 2: Add Authentication (with Facebook)**
+    https://juan-garcia-carmona.blogspot.com/2018/06/asp-net-core-21-angular-6-autenticacion.html
+    
+ **3. Step 3: SonarQube, Code Metricts and project reorganization**
+    https://juan-garcia-carmona.blogspot.com/2018/06/docker-practico-sonarqube.html
+
