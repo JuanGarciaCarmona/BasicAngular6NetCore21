@@ -6,7 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Model\Options\" />
+    <Compile Remove="Model\Options\**" />
+    <Content Remove="Model\Options\**" />
+    <EmbeddedResource Remove="Model\Options\**" />
+    <None Remove="Model\Options\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AdminModule } from './admin/admin.module';
 import { AuthService } from './_services/auth.service';
+import { LoginFacebookComponent } from './login-facebook/login-facebook.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AuthService } from './_services/auth.service';
     SignupComponent,
     LoginComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    LoginFacebookComponent
   ],
   imports: [
     BrowserModule,

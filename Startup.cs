@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using System.Net;
 using NetCore21.Extensions;
 using System.IO;
+using NetCore21.Model.Social.Facebook;
 
 namespace NetCore21
 {
@@ -42,6 +43,9 @@ namespace NetCore21
           b => b.MigrationsAssembly("NetCore21")));
 
       services.AddSingleton<IJwtFactory, JwtFactory>();
+
+      // Register the ConfigurationBuilder instance of FacebookAuthSettings
+      services.Configure<FacebookAuthSettings>(Configuration.GetSection(nameof(FacebookAuthSettings)));
 
       services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
 

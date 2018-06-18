@@ -4,11 +4,14 @@ import { Login } from '../_models/login.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { UserProfile } from '../_models/userProfile.model';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class AuthService {
 
-  private loggedIn = false;
+  // Create a stream of logged in status to communicate throughout app
+  loggedIn: boolean;
+  loggedIn$ = new BehaviorSubject<boolean>(this.loggedIn);
   userProfile: UserProfile;
 
   constructor(
@@ -38,6 +41,17 @@ export class AuthService {
           this.router.navigate(['/profile'])
         }
       )
+  }
+
+  facebookLogin(accessToken: string) {
+  
+    return this.http.post(
+      this.baseUrl + 'api/facebook/authenticate', JSON.stringify({ accessToken }), { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) })
+      .subscribe(data => {
+        this.setSession(data)
+        this.loggedIn = true
+        this.router.navigate(['/profile'])
+      })
   }
 
   logout() {
