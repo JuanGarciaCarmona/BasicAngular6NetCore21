@@ -9,7 +9,7 @@
 **/bin
 /obj
 **/obj
-/wwwroot
+**/wwwroot
 
 #SonarQube
 /.sonarqube
