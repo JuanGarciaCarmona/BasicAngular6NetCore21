@@ -1,4 +1,3 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/xxhjsa63unm0f00b?svg=true)](https://ci.appveyor.com/project/JuanGarciaCarmona/NetCore21) 
 [![Build history](https://buildstats.info/appveyor/chart/JuanGarciaCarmona/NetCore21)](https://ci.appveyor.com/project/JuanGarciaCarmona/NetCore21/history?branch=master)
 
  
