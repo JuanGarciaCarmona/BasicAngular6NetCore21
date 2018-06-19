@@ -1,4 +1,8 @@
+![AppVeyor ](https://ci.appveyor.com/api/github/webhook?id=xxhjsa63unm0f00b/branch/master?svg=true)
+[![Build history](https://buildstats.info/appveyor/chart/JuanGarciaCarmona/NetCore21)](https://ci.appveyor.com/project/JuanGarciaCarmona/NetCore21/history?branch=master)
 
+ 
+ 
  **1. Step 1: Basic Project**
     http://juan-garcia-carmona.blogspot.com/2018/06/asp-net-core-21-angular-6.html
     
