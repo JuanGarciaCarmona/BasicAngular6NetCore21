@@ -158,18 +158,14 @@ var AuthService = /** @class */ (function () {
         var _this = this;
         return this.http.post(this.baseUrl + 'api/auth/login', user)
             .subscribe(function (data) {
-            _this.setSession(data);
-            _this.loggedIn = true;
-            _this.router.navigate(['/profile']);
+            _this.performLogin(data);
         });
     };
     AuthService.prototype.facebookLogin = function (accessToken) {
         var _this = this;
         return this.http.post(this.baseUrl + 'api/facebook/authenticate', JSON.stringify({ accessToken: accessToken }), { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({ 'Content-Type': 'application/json' }) })
             .subscribe(function (data) {
-            _this.setSession(data);
-            _this.loggedIn = true;
-            _this.router.navigate(['/profile']);
+            _this.performLogin(data);
         });
     };
     AuthService.prototype.logout = function () {
@@ -191,6 +187,11 @@ var AuthService = /** @class */ (function () {
     };
     AuthService.prototype.isLoggedIn = function () {
         return this.loggedIn;
+    };
+    AuthService.prototype.performLogin = function (data) {
+        this.setSession(data);
+        this.loggedIn = true;
+        this.router.navigate(['/profile']);
     };
     AuthService.prototype.setSession = function (authResult) {
         var expiresAt = authResult.expiresIn * 1000 + Date.now();
@@ -968,7 +969,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\Repos\NetCore21\BasicAngular6NetCore21\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! D:\Repos\NetCore21\BasicAngular6NetCore21\NetCore21.Site\src\main.ts */"./src/main.ts");
 
 
 /***/ })
