@@ -26,8 +26,7 @@ after_build:
 test_script:
   - cmd: cd tests/NetCore21.Authentication.Tests
   - cmd: dotnet test
-  - cmd: dotnet ../../
-  - cmd: dotnet test/NetCore21.Site.Tests
+  - cmd: cd ../../test/NetCore21.Site.Tests
   - cmd: dotnet test
 
 on_finish :
