@@ -1,4 +1,5 @@
-namespace NetCore21.Site.Model.Entities
+
+namespace NetCore21.Authentication.Domain
 {
   public class Partner
   {

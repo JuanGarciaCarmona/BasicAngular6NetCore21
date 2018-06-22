@@ -1,4 +1,5 @@
-namespace NetCore21.Site
+
+namespace NetCore21.Authentication.Domain
 {
   public static class Constants
   {

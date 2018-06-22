@@ -6,28 +6,28 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Model\Options\**" />
-    <Content Remove="Model\Options\**" />
-    <EmbeddedResource Remove="Model\Options\**" />
-    <None Remove="Model\Options\**" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Folder Include="Auth\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="7.0.0" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="4.0.0" />
-    <PackageReference Include="FluentValidation" Version="7.6.0" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="7.6.0" />
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="4.0.1" />
+    <PackageReference Include="FluentValidation" Version="7.6.103" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="7.6.103" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NetCore21.Authentication.Abstract\NetCore21.Authentication.Abstract.csproj" />
+    <ProjectReference Include="..\NetCore21.Authentication.Data\NetCore21.Authentication.Data.csproj" />
+    <ProjectReference Include="..\NetCore21.Authentication.Domain\NetCore21.Authentication.Domain.csproj" />
+    <ProjectReference Include="..\NetCore21.Authentication.Service\NetCore21.Authentication.csproj" />
   </ItemGroup>
 
 </Project>

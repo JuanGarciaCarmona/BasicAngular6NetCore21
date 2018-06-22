@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 
-namespace NetCore21.Site.Auth
+namespace NetCore21.Authentication.Domain
 {
   public class JwtOptions
   {

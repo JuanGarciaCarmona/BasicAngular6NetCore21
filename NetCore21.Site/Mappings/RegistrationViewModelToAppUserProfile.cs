@@ -1,5 +1,5 @@
 using AutoMapper;
-using NetCore21.Site.Model.Entities;
+using NetCore21.Authentication.Domain;
 using NetCore21.Site.ViewModels;
 
 namespace NetCore21.Site.Mappings

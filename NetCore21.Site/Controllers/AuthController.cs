@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using NetCore21.Site.Auth;
+using NetCore21.Authentication;
+using NetCore21.Authentication.Abstract;
+using NetCore21.Authentication.Domain;
 using NetCore21.Site.Helper;
-using NetCore21.Site.Model.Entities;
 using NetCore21.Site.ViewModels;
 using Newtonsoft.Json;
 using System.Security.Claims;

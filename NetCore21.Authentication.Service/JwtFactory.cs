@@ -4,8 +4,10 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
+using NetCore21.Authentication.Abstract;
+using NetCore21.Authentication.Domain;
 
-namespace NetCore21.Site.Auth
+namespace NetCore21.Authentication
 {
   public class JwtFactory : IJwtFactory
   {
@@ -13,7 +15,15 @@ namespace NetCore21.Site.Auth
 
     public JwtFactory(IOptions<JwtOptions> jwtOptions)
     {
-      _jwtOptions = jwtOptions.Value;
+      if (jwtOptions == null)
+      {
+        throw new ArgumentNullException(nameof(jwtOptions));
+      }
+      else
+      {
+        _jwtOptions = jwtOptions.Value;
+      }
+
       ThrowIfInvalidOptions(_jwtOptions);
     }
 
@@ -70,11 +80,6 @@ namespace NetCore21.Site.Auth
       if (options.SigningCredentials == null)
       {
         throw new ArgumentOutOfRangeException(nameof(options), "SigningCredentials must not be null.");
-      }
-
-      if (options.JtiGenerator == null)
-      {
-        throw new ArgumentOutOfRangeException(nameof(options), "JtiGenerator must not be null.");
       }
     }
   }

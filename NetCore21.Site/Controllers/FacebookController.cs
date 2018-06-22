@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using NetCore21.Site.Auth;
+using NetCore21.Authentication;
+using NetCore21.Authentication.Abstract;
+using NetCore21.Authentication.Domain;
 using NetCore21.Site.Data;
 using NetCore21.Site.Helper;
-using NetCore21.Site.Model.Entities;
 using NetCore21.Site.Model.Social.Facebook;
 using NetCore21.Site.ViewModels;
 using Newtonsoft.Json;
@@ -17,14 +18,14 @@ namespace NetCore21.Site.Controllers
   [Route("api/[controller]/[action]")]
   public class FacebookController : Controller
   {
-    private readonly NetCore21DbContext _appDbContext;
+    private readonly NetCore21AuthDbContext _appDbContext;
     private readonly UserManager<AppUser> _userManager;
     private readonly FacebookAuthSettings _fbAuthSettings;
     private readonly IJwtFactory _jwtFactory;
     private readonly JwtOptions _jwtOptions;
     private static readonly HttpClient Client = new HttpClient();
 
-    public FacebookController(IOptions<FacebookAuthSettings> fbAuthSettingsAccessor, UserManager<AppUser> userManager, NetCore21DbContext appDbContext, IJwtFactory jwtFactory, IOptions<JwtOptions> jwtOptions)
+    public FacebookController(IOptions<FacebookAuthSettings> fbAuthSettingsAccessor, UserManager<AppUser> userManager, NetCore21AuthDbContext appDbContext, IJwtFactory jwtFactory, IOptions<JwtOptions> jwtOptions)
     {
       _fbAuthSettings = fbAuthSettingsAccessor.Value;
       _userManager = userManager;

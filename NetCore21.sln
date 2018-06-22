@@ -7,6 +7,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCore21.Site", "NetCore21
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCore21.Site.Tests", "tests\NetCore21.Site.Tests\NetCore21.Site.Tests.csproj", "{225B8718-FEE3-45C5-9E0C-32C1E97B4DAC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{3665DB5A-6488-4E35-AEE3-A37FA45CFC3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCore21.Authentication.Abstract", "NetCore21.Authentication.Abstract\NetCore21.Authentication.Abstract.csproj", "{5658E956-2C6E-4698-9C5D-9B893385DE53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCore21.Authentication", "NetCore21.Authentication.Service\NetCore21.Authentication.csproj", "{083F59FD-CB70-4ED6-90D6-2B1375ECFBC1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{AA51B674-5B62-49F7-918C-2AAC7828FC9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCore21.Authentication.Domain", "NetCore21.Authentication.Domain\NetCore21.Authentication.Domain.csproj", "{4E29B14F-B7BC-4511-B6B4-D5ED2BCDE6ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCore21.Authentication.Tests", "tests\NetCore21.Authentication.Tests\NetCore21.Authentication.Tests.csproj", "{3097F24E-1857-4676-A38E-56E6E56B238D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCore21.Authentication.Data", "NetCore21.Authentication.Data\NetCore21.Authentication.Data.csproj", "{A94A0A97-BF47-4D24-A016-3BA41465D157}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +35,37 @@ Global
 		{225B8718-FEE3-45C5-9E0C-32C1E97B4DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{225B8718-FEE3-45C5-9E0C-32C1E97B4DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{225B8718-FEE3-45C5-9E0C-32C1E97B4DAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5658E956-2C6E-4698-9C5D-9B893385DE53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5658E956-2C6E-4698-9C5D-9B893385DE53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5658E956-2C6E-4698-9C5D-9B893385DE53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5658E956-2C6E-4698-9C5D-9B893385DE53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{083F59FD-CB70-4ED6-90D6-2B1375ECFBC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{083F59FD-CB70-4ED6-90D6-2B1375ECFBC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{083F59FD-CB70-4ED6-90D6-2B1375ECFBC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{083F59FD-CB70-4ED6-90D6-2B1375ECFBC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E29B14F-B7BC-4511-B6B4-D5ED2BCDE6ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E29B14F-B7BC-4511-B6B4-D5ED2BCDE6ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E29B14F-B7BC-4511-B6B4-D5ED2BCDE6ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E29B14F-B7BC-4511-B6B4-D5ED2BCDE6ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3097F24E-1857-4676-A38E-56E6E56B238D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3097F24E-1857-4676-A38E-56E6E56B238D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3097F24E-1857-4676-A38E-56E6E56B238D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3097F24E-1857-4676-A38E-56E6E56B238D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A94A0A97-BF47-4D24-A016-3BA41465D157}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A94A0A97-BF47-4D24-A016-3BA41465D157}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A94A0A97-BF47-4D24-A016-3BA41465D157}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A94A0A97-BF47-4D24-A016-3BA41465D157}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{225B8718-FEE3-45C5-9E0C-32C1E97B4DAC} = {AA51B674-5B62-49F7-918C-2AAC7828FC9E}
+		{5658E956-2C6E-4698-9C5D-9B893385DE53} = {3665DB5A-6488-4E35-AEE3-A37FA45CFC3D}
+		{083F59FD-CB70-4ED6-90D6-2B1375ECFBC1} = {3665DB5A-6488-4E35-AEE3-A37FA45CFC3D}
+		{4E29B14F-B7BC-4511-B6B4-D5ED2BCDE6ED} = {3665DB5A-6488-4E35-AEE3-A37FA45CFC3D}
+		{3097F24E-1857-4676-A38E-56E6E56B238D} = {AA51B674-5B62-49F7-918C-2AAC7828FC9E}
+		{A94A0A97-BF47-4D24-A016-3BA41465D157} = {3665DB5A-6488-4E35-AEE3-A37FA45CFC3D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0886965B-2388-467B-BC77-4589AC6CA543}

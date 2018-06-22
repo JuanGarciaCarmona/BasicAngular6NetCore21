@@ -4,14 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NetCore21.Site.Data;
-using NetCore21.Site.Model.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using NetCore21.Site.Auth;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Http;
 using FluentValidation.AspNetCore;
@@ -20,6 +17,10 @@ using System.Net;
 using NetCore21.Site.Extensions;
 using System.IO;
 using NetCore21.Site.Model.Social.Facebook;
+using NetCore21.Authentication.Abstract;
+using NetCore21.Authentication.Domain;
+using NetCore21.Authentication;
+using NetCore21.Site.Data;
 
 namespace NetCore21.Site
 {
@@ -38,7 +39,7 @@ namespace NetCore21.Site
     public void ConfigureServices(IServiceCollection services)
     {
       // Add framework services.
-      services.AddDbContext<NetCore21DbContext>(options =>
+      services.AddDbContext<NetCore21AuthDbContext>(options =>
           options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
           b => b.MigrationsAssembly("NetCore21.Site")));
 
@@ -103,7 +104,7 @@ namespace NetCore21.Site
         o.Password.RequiredLength = 6;
       });
       builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), builder.Services);
-      builder.AddEntityFrameworkStores<NetCore21DbContext>().AddDefaultTokenProviders();
+      builder.AddEntityFrameworkStores<NetCore21AuthDbContext>().AddDefaultTokenProviders();
 
       services.AddAutoMapper();
       services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>()); ;

@@ -1,7 +1,7 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace NetCore21.Site.Auth
+namespace NetCore21.Authentication.Abstract
 {
   public interface IJwtFactory
   {

@@ -1,9 +1,11 @@
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using NetCore21.Authentication.Abstract;
+using NetCore21.Authentication.Domain;
 using Newtonsoft.Json;
 
-namespace NetCore21.Site.Auth
+namespace NetCore21.Authentication
 {
   public static class TokenGenerator
   {

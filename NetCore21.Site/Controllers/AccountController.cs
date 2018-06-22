@@ -1,9 +1,9 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NetCore21.Authentication.Domain;
 using NetCore21.Site.Data;
 using NetCore21.Site.Helper;
-using NetCore21.Site.Model.Entities;
 using NetCore21.Site.ViewModels;
 using System.Threading.Tasks;
 
@@ -12,11 +12,11 @@ namespace NetCore21.Site.Controllers
   [Route("api/[controller]")]
   public class AccountController : Controller
   {
-    private readonly NetCore21DbContext _appDbContext;
+    private readonly NetCore21AuthDbContext _appDbContext;
     private readonly UserManager<AppUser> _userManager;
     private readonly IMapper _mapper;
 
-    public AccountController(UserManager<AppUser> userManager, IMapper mapper, NetCore21DbContext appDbContext)
+    public AccountController(UserManager<AppUser> userManager, IMapper mapper, NetCore21AuthDbContext appDbContext)
     {
       _userManager = userManager;
       _mapper = mapper;

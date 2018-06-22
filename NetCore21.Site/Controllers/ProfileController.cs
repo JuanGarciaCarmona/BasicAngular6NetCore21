@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NetCore21.Authentication.Domain;
 using NetCore21.Site.Data;
-using NetCore21.Site.Model.Entities;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -16,9 +16,9 @@ namespace NetCore21.Site.Controllers
   public class ProfileController : Controller
   {
     private readonly ClaimsPrincipal _caller;
-    private readonly NetCore21DbContext _appDbContext;
+    private readonly NetCore21AuthDbContext _appDbContext;
 
-    public ProfileController(UserManager<AppUser> userManager, NetCore21DbContext appDbContext, IHttpContextAccessor httpContextAccessor)
+    public ProfileController(UserManager<AppUser> userManager, NetCore21AuthDbContext appDbContext, IHttpContextAccessor httpContextAccessor)
     {
       _caller = httpContextAccessor.HttpContext.User;
       _appDbContext = appDbContext;
